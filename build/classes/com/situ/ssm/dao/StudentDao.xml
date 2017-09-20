@@ -6,5 +6,107 @@
 	<select id="findAll" resultType="Student">
 		select * from student;
 	</select>
-
+	
+	<resultMap type="Student" id="Student">
+		<id column="student_id" property="id" />
+		<result column="student_name" property="name"/>
+		<result column="age" property="age"/>
+		<result column="gender" property="gender"/>
+		<result column="birthday" property="birthday"/>
+		<result column="address" property="address"/>
+		<association property="banji" javaType="Banji">
+			<id column="banji_id" property="id"/>
+			<result column="banji_name" property="name" />
+			<collection property="couresList" ofType="Coures">
+				<id column="coures_id" property="id"/>
+				<result column="coures_name" property="name"/>
+				<result column="grade" property="grade"/>
+			</collection>
+		</association>
+	</resultMap>
+	<select id="pageList" parameterType="SearchCondition" resultMap="Student">
+		select student.id as student_id,student.name as student_name,age,gender,birthday,address,banji.id as banji_id,banji.name as banji_name,coures.id  as coures_id,coures.name as coures_name,grade
+		FROM student LEFT JOIN banji ON student.banji_id = banji.id
+		LEFT JOIN banji_coures ON banji.id = banji_coures.banji_id
+		LEFT JOIN coures ON banji_coures.coure_id = coures.id 
+		<where>
+			<if test="student != null and student.name != null and !&quot;&quot;.equals(student.name.trim())">
+				and student.name like '%${student.name}%'
+			</if>
+			<if test="student != null and student.age != null">
+				and age = #{student.age}
+			</if>
+			<if test="student != null and student.birthday != null and !&quot;&quot;.equals(student.birthday.trim())">
+				and birthday = #{student.birthday}
+			</if>
+			<if test="student != null and student.address != null and !&quot;&quot;.equals(student.address.trim())">
+				and address = #{student.address}
+			</if>
+			<if test="student != null and student.gender != null and !&quot;&quot;.equals(student.gender.trim())">
+				and gender = #{student.gender}
+			</if>
+			<if test="student != null and student.banji != null and student.banji.name != null and !&quot;&quot;.equals(student.banji.name.trim())">
+				and banji.name = #{student.banji.name}
+			</if>
+		</where>
+		limit #{pageIndex},#{pageSize}
+	</select>
+	
+	<select id="getCount" parameterType="SearchCondition" resultType="int">
+		select count(*) 
+		FROM student LEFT JOIN banji ON student.banji_id = banji.id
+		LEFT JOIN banji_coures ON banji.id = banji_coures.banji_id
+		LEFT JOIN coures ON banji_coures.coure_id = coures.id 
+		<where>
+			<if test="student !=null and student.name != null and !&quot;&quot;.equals(student.name.trim())">
+				and student.name like '%${student.name}%'
+			</if>
+			<if test="student != null and student.age != null">
+				and age = #{student.age}
+			</if>
+			<if test="student != null and student.birthday != null and !&quot;&quot;.equals(student.birthday.trim())">
+				and birthday = #{student.birthday}
+			</if>
+			<if test="student != null and student.address != null and !&quot;&quot;.equals(student.address.trim())">
+				and address = #{student.address}
+			</if>
+			<if test="student != null and student.gender != null and !&quot;&quot;.equals(student.gender.trim())">
+				and gender = #{student.gender}
+			</if>
+			<if test="student != null and student.banji!=null and student.banji.name != null and !&quot;&quot;.equals(student.banji.name.trim())">
+				and banji.name = #{student.banji.name}
+			</if>
+			</where>
+	</select>
+	
+	<insert id="addStudent" parameterType="Student">
+		insert into student(name,gender,age,address,birthday) values(#{name},#{gender},#{age},#{address},#{birthday});
+	</insert>
+	<delete id="deleteStudent" parameterType="int">
+		delete from student where id = #{id};
+	</delete>
+	<update id="updateStudent" parameterType="Student">
+		update student 
+		<set>
+			<if test="name != null and !&quot;&quot;.equals(name.trim())">
+				name = #{name},
+			</if>	
+			<if test="age != null and !&quot;&quot;.equals(age.trim())">
+				age = #{age},
+			</if>	
+			<if test="gender != null and !&quot;&quot;.equals(gender.trim())">
+				gender = #{gender},
+			</if>	
+			
+			<if test="address != null and !&quot;&quot;.equals(address.trim())">
+				address = #{address},
+			</if>	
+			<if test="birthday != null and !&quot;&quot;.equals(birthday.trim())">
+				birthday = #{birthday},
+			</if>	
+		</set>
+	</update>
+	<select id="findById" parameterType="int" resultMap="Student">
+		select id,name,gender,age,address,birthday from student where id = #{id};
+	</select>
 </mapper>
