@@ -46,4 +46,8 @@ public class StudentServiceImpl implements IStudentService{
 		public void deleteStudent(Integer id) {
 			studentDao.deleteStudent(id);
 		}
+
+		public void addStudent(Student student) {
+				studentDao.addStudent(student);
+		}
 }

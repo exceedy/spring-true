@@ -91,7 +91,7 @@
 			<if test="name != null and !&quot;&quot;.equals(name.trim())">
 				name = #{name},
 			</if>	
-			<if test="age != null and !&quot;&quot;.equals(age.trim())">
+			<if test="age != null">
 				age = #{age},
 			</if>	
 			<if test="gender != null and !&quot;&quot;.equals(gender.trim())">
@@ -106,7 +106,7 @@
 			</if>	
 		</set>
 	</update>
-	<select id="findById" parameterType="int" resultMap="Student">
+	<select id="findById" parameterType="int" resultType="Student">
 		select id,name,gender,age,address,birthday from student where id = #{id};
 	</select>
 </mapper>

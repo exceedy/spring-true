@@ -22,14 +22,14 @@
 		if(isDel) {
 			$("#mainform").submit();
 		}
+	}
 	function deleteStudent(id) {
-		alter("caonima");
 		var isDel = confirm("确定删除？");
 		if(isDel) {
 			location.href = "${pageContext.request.contextPath}/student/deleteStudent.action?id="+id;
 		}
 	}
-	}
+	
 	
 </script>
 </head>

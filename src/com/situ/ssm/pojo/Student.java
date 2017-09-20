@@ -19,6 +19,17 @@ public class Student implements Serializable{
 	}
 
 	
+	
+	public Student(String name, String address, String gender, Integer age, Date birthday) {
+		super();
+		this.name = name;
+		this.address = address;
+		this.gender = gender;
+		this.age = age;
+		this.birthday = birthday;
+	}
+
+
 
 	public Student(String name, String address, String gender, Integer age, Date birthday, Banji banji) {
 		super();
