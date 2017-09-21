@@ -53,4 +53,8 @@ public interface BanjiDao {
 	 * @return
 	 */
 	List<Banji> findAll();
+
+	void deleteBanjiCoures(Integer id);
+
+	void updateStudentBanjiId(@Param(value="id")Integer id);
 }

@@ -1,6 +1,7 @@
 package com.situ.ssm.pojo;
 
 public class BanjiCoures {
+	private Integer id;
 	private Banji banji;
 	private Coures coures;
 	
@@ -9,6 +10,27 @@ public class BanjiCoures {
 		super();
 		this.banji = banji;
 		this.coures = coures;
+	}
+
+	
+
+	public BanjiCoures(Integer id, Banji banji, Coures coures) {
+		super();
+		this.id = id;
+		this.banji = banji;
+		this.coures = coures;
+	}
+
+
+
+	public Integer getId() {
+		return id;
+	}
+
+
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 
@@ -39,7 +61,7 @@ public class BanjiCoures {
 
 	@Override
 	public String toString() {
-		return "BanjiCoures [banji=" + banji + ", coures=" + coures + "]";
+		return "BanjiCoures [id=" + id + ", banji=" + banji + ", coures=" + coures + "]";
 	}
 	
 	

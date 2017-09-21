@@ -62,6 +62,8 @@ public class BanjiServiceImpl implements IBanjiService {
 	}
 
 	public void deleteBanji(Integer id) {
+			/*banjiDao.updateStudentBanjiId(id);*/
+			banjiDao.deleteBanjiCoures(id);
 			banjiDao.deleteBanji(id);
 	}
 

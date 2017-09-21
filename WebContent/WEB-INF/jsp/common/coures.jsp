@@ -20,22 +20,22 @@
 		      <ul class="nav navbar-nav">
 		        <li >
 		        
-		        	<a href="${pageContext.request.contextPath}/student?method=pageList">
+		        	<a href="${pageContext.request.contextPath}/student/pageList.action">
 		        	<span class="glyphicon glyphicon-user"></span>
 		        	学生管理<span class="sr-only">(current)</span></a></li>
 		        	
 		        <li >
-		        	<a href="${pageContext.request.contextPath}/banji?method=pageList">
+		        	<a href="${pageContext.request.contextPath}/banji/pageList.action">
 		        	<span class="glyphicon glyphicon-home"></span>
 		        	班级管理</a></li>
 		        	
 		        
 		        <li class="active">
-		        	<a href="${pageContext.request.contextPath}/coures?method=pageList">
+		        	<a href="${pageContext.request.contextPath}/coures/pageList.action">
 		        	<span class="glyphicon glyphicon-book"></span>
 		        	课程管理</a></li>
 		         <li>
-		        	<a href="${pageContext.request.contextPath}/banjicoures?method=pageList">
+		        	<a href="${pageContext.request.contextPath}/banjicoures/pageList.action">
 		        	<span class="glyphicon glyphicon-tags"></span>
 		        	教务管理</a></li>
 		        </ul>
@@ -43,11 +43,11 @@
 		    <ul class="nav navbar-nav navbar-right">
 		  	  <li><a>欢迎回来${admin.ursename}</a></li>
 		    	<li>
-		    		<a href="${pageContext.request.contextPath}/admin?method=toOnlineList">在线人数${fn:length(onLineAdminList)}</a>
+		    		<a href="${pageContext.request.contextPath}/admin/toOnlineList.action">在线人数${fn:length(onLineAdminList)}</a>
 				</li>
 				<li>
 				<li>
-					<a href="${pageContext.request.contextPath}/admin?method=out">
+					<a href="${pageContext.request.contextPath}/admin/method=out.action">
 		        	<span class="glyphicon glyphicon-off"></span>
 					退出</a>
      

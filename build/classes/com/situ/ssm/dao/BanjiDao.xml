@@ -56,4 +56,17 @@
   			insert into banji(name) values(#{name});
   		</insert>
   		
+  		<delete id="deleteBanjiCoures" parameterType="int">
+  			delete from banji_coures where banji_id= #{id}
+  		</delete>
+  		
+  		<update id="updateStudentBanjiId" parameterType="int">
+  			update student
+  			 <set>
+  				<if test="id != null">
+  					banji_id = 0,
+  				</if>
+  			</set>
+  			where banji_id = #{id}
+  		</update>
   </mapper>

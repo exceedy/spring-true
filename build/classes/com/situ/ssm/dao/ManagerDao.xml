@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.situ.ssm.dao.ManagerDao">
+  		<resultMap type="Banji" id="BanjiMap">
+  			<id column="id" property="id"/>
+  			<result column="name" property="name"/>
+  			<collection property="couresList" ofType="Coures">
+  				<id column="coures_id" property="id"/>
+  				<result column="coures_name" property="name"/>
+  				<result column="grade" property="grade"/>
+  			</collection>
+  		</resultMap>
+  		<select id="pageList" parameterType="SearchCondition" resultMap="BanjiMap">
+  			select banji.id,banji.name,coures.id as coures_id,coures.name as coures_name,grade 
+  			from banji left join banji_coures on banji.id=banji_coures.banji_id 
+  			left join coures on banji_coures.coure_id = coures.id 
+  			<where>
+  				<if test=""></if>
+  			</where>
+  		</select>
+  </mapper>

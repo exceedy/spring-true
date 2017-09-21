@@ -1,15 +1,35 @@
 package com.situ.ssm.pojo;
 
+import java.util.List;
+
 public class Coures {
 	private Integer id;
 	private String name;
 	private Integer grade;
+	private List<Banji> banjiList;
 	
 	
 	public Coures() {
 		super();
 	}
 	
+
+	public Coures(Integer id, String name, Integer grade, List<Banji> banjiList) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.grade = grade;
+		this.banjiList = banjiList;
+	}
+
+	public List<Banji> getBanjiList() {
+		return banjiList;
+	}
+
+	public void setBanjiList(List<Banji> banjiList) {
+		this.banjiList = banjiList;
+	}
+
 	public Coures(Integer id, String name, Integer grade) {
 		super();
 		this.id = id;
