@@ -53,7 +53,7 @@
   		</delete>
 
   		<insert id="addBanji" parameterType="Banji">
-  			insert into banji(name) valuues(#{name});
+  			insert into banji(name) values(#{name});
   		</insert>
   		
   </mapper>

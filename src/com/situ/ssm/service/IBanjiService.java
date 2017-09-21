@@ -12,4 +12,12 @@ public interface IBanjiService {
 
 	PageBean<Banji> pageBean(SearchCondition searchCondition);
 
+	void addBanji(Banji banji);
+
+	void deleteBanji(Integer id);
+
+	void updateBanji(Banji banji);
+
+	Banji findById(Integer id);
+
 }

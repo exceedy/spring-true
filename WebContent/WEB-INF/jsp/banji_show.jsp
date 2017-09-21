@@ -47,7 +47,7 @@
 		        <div class="col-md-2">
 		            <div class="list-group">
 		                <a href="${pageContext.request.contextPath}/banji/pageList.action" class="list-group-item active">班级管理</a>
-		                <a href="${pageContext.request.contextPath}/banji/toAddbanji.action" class="list-group-item ">添加班级</a>
+		                <a href="${pageContext.request.contextPath}/banji/toAddBanji.action" class="list-group-item ">添加班级</a>
 		            </div>
 		        </div>
 		        <div class="col-md-10">
@@ -56,7 +56,7 @@
 		                    <a href="${pageContext.request.contextPath}/banji/pageList.action">班级列表</a>
 		                </li>
 		                <li  >
-		                	<a href="${pageContext.request.contextPath}/banji/toAddbanji.action">添加班级</a>
+		                	<a href="${pageContext.request.contextPath}/banji/toAddBanji.action">添加班级</a>
 		                </li>
 		            </ul>
 		            
@@ -97,7 +97,7 @@
 							${cou.name}
 						</c:forEach>
 					</td>	
-					<td><a class="btn btn-primary" href="${pageContext.request.contextPath}/banji/toupdate.action?id=${banji.id}">修改</a></td>
+					<td><a class="btn btn-primary" href="${pageContext.request.contextPath}/banji/toUpdateBanji.action?id=${banji.id}">修改</a></td>
 					<td><a class="btn btn-danger" href="javascript:deletebanji(${banji.id})">删除</a></td>
 					<td></td>
 				</tr>

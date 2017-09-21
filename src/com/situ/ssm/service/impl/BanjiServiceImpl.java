@@ -56,5 +56,22 @@ public class BanjiServiceImpl implements IBanjiService {
 		pageBean.setList(list);
 		return pageBean;
 	}
+
+	public void addBanji(Banji banji) {
+		banjiDao.addBanji(banji);
+	}
+
+	public void deleteBanji(Integer id) {
+			banjiDao.deleteBanji(id);
+	}
+
+	public void updateBanji(Banji banji) {
+		banjiDao.updateBanji(banji);
+	}
+
+	public Banji findById(Integer id) {
+		return banjiDao.findById(id);
+		
+	}
 		
 }
