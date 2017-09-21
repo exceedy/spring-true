@@ -50,4 +50,12 @@ public class StudentServiceImpl implements IStudentService{
 		public void addStudent(Student student) {
 				studentDao.addStudent(student);
 		}
+
+		public Student findById(Integer id) {
+			return studentDao.findById(id);
+		}
+
+		public void updateStudent(Student student) {
+			studentDao.updateStudent(student);
+		}
 }

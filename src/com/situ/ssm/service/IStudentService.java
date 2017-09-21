@@ -11,4 +11,6 @@ public interface IStudentService {
 		PageBean<Student> pageList(SearchCondition searchCondition);
 		void deleteStudent(Integer id);
 		void addStudent(Student student);
+		Student findById(Integer id);
+		void updateStudent(Student student);
 }

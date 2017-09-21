@@ -10,6 +10,9 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/css/lib/bootstrap/js/bootstrap.min.js" ></script>
 <title>Insert title here</title>
 <script type="text/javascript">
+$(function() {
+	$("#gender option[value='${searchCondition.student.gender}']").prop("selected",true);
+}); 
 	function goPage(pageIndex) {
 		$("#pageIndex").val(pageIndex);
 		$("#serviceForm").submit();
@@ -57,16 +60,16 @@
 				<div class="container">
 					<form class="form-inline" action="${pageContext.request.contextPath}/student/pageList.action?pageSize=${searchCondition.pageSize}" id="serviceForm" >
 					<input type="hidden" name="pageIndex" id="pageIndex"/>
-							姓名：<input  class="form-control " type="text" name="name" value="${searchCondition.student.name}"/>
-							年龄：<input class="form-control " type="text" name="age" value="${searchCondition.student.age}"/>
-							地址：<input class="form-control " type="text" name="address" value="${searchCondition.student.address}"/>
-							生日：<input class="form-control " type="text" name="birthday" value="${searchCondition.student.birthday}"/>
-							性别：<select class="form-control " name="gender" id="gender">
+							姓名：<input  class="form-control " type="text" name="student.name" value="${searchCondition.student.name}"/>
+							年龄：<input class="form-control " type="text" name="student.age" value="${searchCondition.student.age}"/>
+							地址：<input class="form-control " type="text" name="student.address" value="${searchCondition.student.address}"/>
+							生日：<input class="form-control " type="text" name="student.birthday" value="${searchCondition.student.birthday}"/>
+							性别：<select class="form-control " name="student.gender" id="gender">
 								<option value="">不限</option>
 								<option value="男">男</option>
 								<option value="女">女</option>
 							</select>
-							班级：<select class="form-control" name="banji" id="banji">
+							班级：<select class="form-control" name="banji.name" id="banji">
 										<option value="">不限</option>	
 										<c:forEach items="${banjiList}" var = "banji">
 												<option value="${banji.name}">${banji.name}</option>	
@@ -86,6 +89,7 @@
 						<td>地址</td>
 						<td>出生日期</td>
 						<td>班级</td>
+						<td>课程</td>
 						<td>修改</td>
 						<td>删除</td>
 					</tr>
@@ -106,7 +110,12 @@
 							<td>${student.address}</td>
 							<td>${student.birthday}</td>
 							<td>${student.banji.name}</td>
-							<td><a class="btn btn-primary" href="${pageContext.request.contextPath}/student/toupdate.action?id=${student.id}">修改</a></td>
+							<td>
+								<c:forEach items="${banji.couresList}" var="coures">
+									${coures.name}
+								</c:forEach>
+							</td>
+							<td><a class="btn btn-primary" href="${pageContext.request.contextPath}/student/toUpdateStudent.action?id=${student.id}">修改</a></td>
 							<%-- <td><a href="${pageContext.request.contextPath}/student/deleteStudent&id=${student.id}">删除</a></td> --%>
 							<td><a class="btn btn-danger" href="javascript:deleteStudent(${student.id})">删除</a></td>
 							<td></td>

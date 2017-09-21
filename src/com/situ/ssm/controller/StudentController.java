@@ -89,7 +89,7 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "addStudent")
-	public String addStudent(String name, String address, String gender, Integer age, String birthday, Banji banji,
+	public String addStudent(String name, String address, String gender, Integer age, String birthday, Integer banjiId,
 			Model model) {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = null;
@@ -100,10 +100,39 @@ public class StudentController {
 				e.printStackTrace();
 			}
 		}
+		Banji banji = new Banji();
+		banji.setId(banjiId);
 		Student student = new Student(name, address, gender, age, date, banji);
+		System.out.println(student);
 		studentService.addStudent(student);
 		return "redirect:/student/pageList.action";
-
+	}
+	
+	@RequestMapping(value="toUpdateStudent")
+	public String toUpdateStudent(Integer id,Model model) {
+		Student student = studentService.findById(id);
+		model.addAttribute("student", student);
+		
+		
+		List<Banji> banjiList = banjiService.banjiList();
+		model.addAttribute("banjiList", banjiList);
+		return "update_student";
+	}
+	
+	public String updateStudent(String name, String address, String gender, Integer age, String birthday, Integer banjiId) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMM-dd");
+		Date date = null;
+		try {
+			date = simpleDateFormat.parse(birthday);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Banji banji = new Banji();
+		banji.setId(banjiId);
+		Student student = new Student(name, address, gender, age, date, banji);
+		studentService.updateStudent(student);
+		return "redirect:/student/pageList.action";
 	}
 
 }

@@ -84,7 +84,7 @@
 					</div>
 					<div class="input-group input-group-sm">
  						 <span class="input-group-addon" id="sizing-addon3">班级</span>
-  						<select  name="banji" class="form-control" placeholder="班级" aria-describedby="sizing-addon3">
+  						<select  name="banjiId" class="form-control" placeholder="班级" aria-describedby="sizing-addon3">
   							<c:forEach items="${banjiList}" var="banji">
   								<option value="${banji.id}">${banji.name}</option>
   							</c:forEach>

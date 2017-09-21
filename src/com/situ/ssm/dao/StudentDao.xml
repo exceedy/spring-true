@@ -104,7 +104,11 @@
 			<if test="birthday != null and !&quot;&quot;.equals(birthday.trim())">
 				birthday = #{birthday},
 			</if>	
+			<if test="banji != null and banji.id != null">
+				banji_id = #{banji.id}
+			</if>
 		</set>
+		where id = #{id};
 	</update>
 	<select id="findById" parameterType="int" resultType="Student">
 		select id,name,gender,age,address,birthday from student where id = #{id};

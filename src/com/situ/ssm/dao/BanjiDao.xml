@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.situ.ssm.dao.BanjiDao">
+  		<resultMap type="Banji" id="banjiMap">
+  			<id column="id" property="id"/>
+  			<result column="name" property="name"/>
+  			<collection property="couresList" ofType="Coures">
+  				<id column="coures_id" property="id"/>
+  				<result column="coures_name" property="name"/>
+  				<result column="grade" property="grade"/>
+  			</collection>
+  		
+  		</resultMap>
+  		
+  		<select id="pageList" parameterType="SearchCondition" resultMap="banjiMap">
+  			SELECT banji.id,banji.name,coures.id AS coures_id,coures.name AS coures_name,grade
+			FROM banji LEFT JOIN banji_coures ON banji.id=banji_coures.banji_id
+			LEFT JOIN coures ON banji_coures.coure_id=coures.id
+			<where>
+				<if test="banji != null and banji.name != null and !&quot;&quot;.equals(banji.name.trim())">
+					banji.name like '%${banji.name}%'
+				</if>
+			</where>
+			limit #{pageIndex},#{pageSize};
+  		</select>
+  		
+  		<select id="findById" parameterType="int" resultType="Banji">
+  			select id,name from banji where id = #{id}
+  		</select>
+  		
+  		<select id="getCount" parameterType="SearchCondition" resultType="int">
+  			select count(*)
+  			FROM banji LEFT JOIN banji_coures ON banji.id=banji_coures.banji_id
+			LEFT JOIN coures ON banji_coures.coure_id=coures.id
+			<where>
+				<if test="banji != null and banji.name != null and !&quot;&quot;.equals(banji.name.trim())">
+					banji.name=#{banji.name}
+				</if>
+			</where>
+  		</select>
+  		<select id="findAll" resultType="Banji">
+  			select id,name from banji;
+  		</select>
+  		
+  		<update id="updateBanji" parameterType="Banji">
+  			UPDATE banji SET NAME = #{name} WHERE id= #{id};
+  		</update>
+  		
+  		<delete id="deleteBanji" parameterType="int">
+  			DELETE FROM banji WHERE id = #{id};
+  		</delete>
+
+  		<insert id="addBanji" parameterType="Banji">
+  			insert into banji(name) valuues(#{name});
+  		</insert>
+  		
+  </mapper>
