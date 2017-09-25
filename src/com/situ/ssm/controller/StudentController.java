@@ -7,8 +7,11 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.situ.ssm.pojo.Banji;
@@ -26,6 +29,13 @@ public class StudentController {
 
 	@Resource(name = "banjiService")
 	private IBanjiService banjiService;
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(
+                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"), true));
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(
+                new SimpleDateFormat("yyyy-MM-dd"), true));
+    }
 
 	@RequestMapping(value = "findAll")
 	public void findAll() {
@@ -36,7 +46,7 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "pageList")
-	public String pageList(String name, String gender, String age, String address, String birthday, String pageIndex,
+	public String pageList(String name, String gender, String age, String address, Date birthday, String pageIndex,
 			String pageSize, String banji, Model model) {
 		SearchCondition searchCondition = new SearchCondition();
 		int index = 1;
@@ -48,7 +58,7 @@ public class StudentController {
 		if (pageSize != null && !"".equals(pageSize.trim())) {
 			size = Integer.parseInt(pageSize);
 		}
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		/*SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = null;
 		if (birthday != null && !"".equals(birthday.trim())) {
 			try {
@@ -56,10 +66,10 @@ public class StudentController {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-		}
+		}*/
 		searchCondition.setPageSize(size);
 		Banji banjiName = new Banji(banji);
-		Student student = new Student(name, address, gender, Integer.getInteger(age), date, banjiName);
+		Student student = new Student(name, address, gender, Integer.getInteger(age), birthday, banjiName);
 		searchCondition.setStudent(student);
 		PageBean<Student> pageBean = studentService.pageList(searchCondition);
 		model.addAttribute("pageBean", pageBean);
@@ -89,21 +99,9 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "addStudent")
-	public String addStudent(String name, String address, String gender, Integer age, String birthday, Integer banjiId,
+	public String addStudent(Student student,
 			Model model) {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = null;
-		if (birthday != null && !"".equals(birthday.trim())) {
-			try {
-				date = simpleDateFormat.parse(birthday);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-		}
-		Banji banji = new Banji();
-		banji.setId(banjiId);
-		Student student = new Student(name, address, gender, age, date, banji);
-		System.out.println(student);
+		
 		studentService.addStudent(student);
 		return "redirect:/student/pageList.action";
 	}
@@ -118,20 +116,23 @@ public class StudentController {
 		model.addAttribute("banjiList", banjiList);
 		return "update_student";
 	}
-	
-	public String updateStudent(String name, String address, String gender, Integer age, String birthday, Integer banjiId) {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMM-dd");
+	@RequestMapping(value="updateStudent")
+	public String updateStudent(Integer id,String name, String address, String gender, Integer age, Date birthday, Integer banjiId) {
+		/*SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = null;
 		try {
 			date = simpleDateFormat.parse(birthday);
+			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		Banji banji = new Banji();
 		banji.setId(banjiId);
-		Student student = new Student(name, address, gender, age, date, banji);
+		Student student = new Student(id,name, address, gender, age, birthday, banji);
 		studentService.updateStudent(student);
+		System.out.println(student);
+		System.out.println(banji);
 		return "redirect:/student/pageList.action";
 	}
 

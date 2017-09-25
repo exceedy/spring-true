@@ -30,6 +30,8 @@
 				
 			});
 		});
+		
+		
 </script>
 <style type="text/css">
 	.from_b{
@@ -84,7 +86,8 @@
 					</div>
 					<div class="input-group input-group-sm">
  						 <span class="input-group-addon" id="sizing-addon3">班级</span>
-  						<select  name="banjiId" class="form-control" placeholder="班级" aria-describedby="sizing-addon3">
+  						<select  name="banji.id" class="form-control" placeholder="班级" aria-describedby="sizing-addon3">
+  							<option value="">不限</option>
   							<c:forEach items="${banjiList}" var="banji">
   								<option value="${banji.id}">${banji.name}</option>
   							</c:forEach>

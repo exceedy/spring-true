@@ -155,8 +155,9 @@ public class Student implements Serializable{
 	@Override
 	public String toString() {
 		return "Student [id=" + id + ", name=" + name + ", address=" + address + ", gender=" + gender + ", age=" + age
-				+ ", birthday=" + birthday + "]";
+				+ ", birthday=" + birthday + ", banji=" + banji + "]";
 	}
-	
-	
+
+
+
 }

@@ -3,21 +3,56 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.situ.ssm.dao.ManagerDao">
-  		<resultMap type="Banji" id="BanjiMap">
+  		<resultMap type="BanjiCoures" id="BanjiCouresMap">
   			<id column="id" property="id"/>
-  			<result column="name" property="name"/>
-  			<collection property="couresList" ofType="Coures">
-  				<id column="coures_id" property="id"/>
-  				<result column="coures_name" property="name"/>
-  				<result column="grade" property="grade"/>
-  			</collection>
+  			<association property="banji" javaType="Banji">
+  				<id column="banji_id" property="id"/>
+  				<result column="banji_name" property="name"/>
+  				<collection property="couresList" ofType="Coures">
+  					<id column="coures_id" property="id"/>
+  					<result column="coures_name" property="name"/>
+  					<result column="grade" property="grade"/>
+  				</collection>
+  			</association>
   		</resultMap>
-  		<select id="pageList" parameterType="SearchCondition" resultMap="BanjiMap">
-  			select banji.id,banji.name,coures.id as coures_id,coures.name as coures_name,grade 
-  			from banji left join banji_coures on banji.id=banji_coures.banji_id 
-  			left join coures on banji_coures.coure_id = coures.id 
+  		<select id="pageList" parameterType="SearchCondition" resultMap="BanjiCouresMap">
+  			select banji_coures.id,banji.id as banji_id,banji.name as banji_name,coures.id as coures_id,coures.name as coures_name,grade 
+  			from banji inner join banji_coures on banji.id=banji_coures.banji_id 
+  			inner join coures on banji_coures.coure_id = coures.id 
   			<where>
-  				<if test=""></if>
+  				<if test="banji != null and banji.name != null and !&quot;&quot;.equals(banji.name.trim())">
+  					and banji.name like '%${banji.name}%'
+  				</if>
+  				<if test="coures != null and coures.name != null and !&quot;&quot;.equals(coures.name.trim())">
+  					and coures.name like '%${coures.name}%'
+  				</if>
+  				<if test="coures != null and coures.grade != null">
+  					and coures.grade = #{coures.grade}
+  				</if>
   			</where>
+  			limit #{pageIndex},#{pageSize}
   		</select>
+  		<select id="getCount" parameterType="SearchCondition" resultType="int">
+  			select count(*) 
+  			from banji inner join banji_coures on banji.id=banji_coures.banji_id 
+  			inner join coures on banji_coures.coure_id = coures.id
+  			<where>
+  				<if test="banji != null and banji.name != null and !&quot;&quot;.equals(banji.name.trim())">
+  					and banji.name like '%${banji.name}%'
+  				</if>
+  				<if test="coures != null and coures.name != null and !&quot;&quot;.equals(coures.name.trim())">
+  					and coures.name like '%${coures.name}%'
+  				</if>
+  				<if test="coures != null and coures.grade != null">
+  					and coures.grade = #{coures.grade}
+  				</if>
+  			</where> 
+  		</select>
+  		
+  		<insert id="addManager" parameterType="BanjiCoures">
+  			insert into banji_coures(banji_id,coure_id) values(#{banji.id},#{coures.id});
+  		</insert>
+  		<delete id="deleteManager" parameterType="int">
+  			delete from banji_coures where id = #{id};
+  		</delete>
   </mapper>

@@ -33,7 +33,7 @@
 		        	<span class="glyphicon glyphicon-book"></span>
 		        	课程管理</a></li>
 		        <li>
-		        	<a href="${pageContext.request.contextPath}/banjicoures/pageList.action">
+		        	<a href="${pageContext.request.contextPath}/manager/pageList.action">
 		        	<span class="glyphicon glyphicon-tags"></span>
 		        	教务管理</a></li>
 		        </ul>

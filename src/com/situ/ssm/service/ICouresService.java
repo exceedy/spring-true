@@ -1,5 +1,7 @@
 package com.situ.ssm.service;
 
+import java.util.List;
+
 import com.situ.ssm.pojo.Coures;
 import com.situ.ssm.vo.PageBean;
 import com.situ.ssm.vo.SearchCondition;
@@ -15,5 +17,7 @@ public interface ICouresService {
 	void updateCoures(Coures coures);
 
 	void deleteCoures(Integer id);
+
+	List<Coures> findAl();
 
 }

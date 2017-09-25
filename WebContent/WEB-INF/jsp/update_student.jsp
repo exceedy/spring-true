@@ -62,7 +62,7 @@
   						<input type="text"  name="birthday" class="form-control"  value="${student.birthday}" aria-describedby="sizing-addon3">
 					</div>
 				 <span class="input-group-addon" id="sizing-addon3">班级</span>
-  						<select id="banji"  name="banjiId" class="form-control" placeholder="班级" aria-describedby="sizing-addon3">
+  						<select  id="banji"  name="banjiId" class="form-control" placeholder="班级" aria-describedby="sizing-addon3">
 								<option value="">无</option>
 							<c:forEach items="${banjiList}" var="banji">
 								<option value="${banji.id}">${banji.name}</option>

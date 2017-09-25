@@ -6,6 +6,12 @@ public class BanjiCoures {
 	private Coures coures;
 	
 	
+	public BanjiCoures() {
+		super();
+	}
+
+
+
 	public BanjiCoures(Banji banji, Coures coures) {
 		super();
 		this.banji = banji;

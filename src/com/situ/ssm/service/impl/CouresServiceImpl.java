@@ -66,4 +66,8 @@ public class CouresServiceImpl implements ICouresService{
 		
 	}
 
+	public List<Coures> findAl() {
+		return couresDao.findAll();
+	}
+
 }

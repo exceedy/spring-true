@@ -111,14 +111,13 @@ $(function() {
 							<td>${student.birthday}</td>
 							<td>${student.banji.name}</td>
 							<td>
-								<c:forEach items="${banji.couresList}" var="coures">
+								<c:forEach items="${student.banji.couresList}" var="coures">
 									${coures.name}
 								</c:forEach>
 							</td>
 							<td><a class="btn btn-primary" href="${pageContext.request.contextPath}/student/toUpdateStudent.action?id=${student.id}">修改</a></td>
 							<%-- <td><a href="${pageContext.request.contextPath}/student/deleteStudent&id=${student.id}">删除</a></td> --%>
 							<td><a class="btn btn-danger" href="javascript:deleteStudent(${student.id})">删除</a></td>
-							<td></td>
 						</tr>
 						</c:forEach>
 					</table>
